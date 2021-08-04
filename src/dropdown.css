@@ -1,0 +1,21 @@
+.drop-down {
+    position: absolute;
+    text-align: center;
+    width: 150px;
+    background-color: rgba(20, 20, 20, 0.8);
+    color: #eee;
+}
+
+.character {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* line-height: 2rem; */
+    cursor: pointer;
+    /* font-weight: 600; */
+    display: flex;
+    align-items: center;
+}
+
+.character > img {
+    height: 2rem;
+    margin: 0 0.5rem;
+}

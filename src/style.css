@@ -1,0 +1,8 @@
+.frame-marker {
+    position: absolute;
+    border: solid 5px #4e8;
+    height: 60px;
+    width: 40px;
+    box-sizing: border-box;
+    font-size: 3rem;
+}

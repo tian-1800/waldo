@@ -1,4 +1,22 @@
-const addDropDown = (coordinates, characters) => {
+import highscore from "./highscore";
+
+import "./dropdown.css";
+import icon from "./img/waldo-icon.jpg";
+
+
+const charDivDOM = (div, callback, character, coordinates) => {
+    const t0 = performance.now();
+    div.addEventListener("click", async () => {
+        const state = await callback(character.name, coordinates);
+        if (state) {
+            console.log(state);
+            const t1 = performance.now();
+            highscore(t1-t0);
+        }   else console.log(state);
+    })
+}
+
+const addDropDown = (coordinates, characters, checkChar) => {
     const dropDown = document.createElement("div");
     const [app] = document.getElementsByClassName("app");
     const [oldDropDown] = document.getElementsByClassName("drop-down");
@@ -7,19 +25,27 @@ const addDropDown = (coordinates, characters) => {
     dropDown.style.top = `${y}px`;
     dropDown.style.left = `${x+25}px`;
     dropDown.className = "drop-down";
-    dropDown.style.position = "absolute";
     app.appendChild(dropDown);
     characters.forEach(character => {
         const charDiv = document.createElement("div");
-        charDiv.textContent = character.name;
+        charDivDOM(charDiv, checkChar, character, coordinates)
+        const iconImg = document.createElement("img");
+        const text = document.createElement("p");
+        text.textContent = character.name;
+        iconImg.src = icon;
+        charDiv.className = "character";
+        charDiv.appendChild(iconImg);
+        charDiv.appendChild(text);
         dropDown.appendChild(charDiv);
     })
 }
 
-const dropDownDOM = (element, characters) => {
+const dropDownDOM = (element, characters, checkChar) => {
     element.addEventListener("click", (e) => {
-        const coordinates = [e.clientX, e.clientY];
-        addDropDown(coordinates, characters);
+        const coordinates = [e.pageX, e.pageY];
+        addDropDown(coordinates, characters, checkChar);
+        // console.log(coordinates);
+        // waldo one is 1170, 200
     })
 }
 
